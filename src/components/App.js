@@ -7,9 +7,10 @@ import FileParser from "./FileParser";
 
 function App() {
   const [fileNames, setFileNames] = useState([]);
-   const handleDrop = (acceptedFiles) =>
+
+  const handleDrop = (acceptedFiles) => {
      setFileNames(acceptedFiles.map((file) => file.name));
- 
+   }
   return (
     <Router>
       <div className="App">

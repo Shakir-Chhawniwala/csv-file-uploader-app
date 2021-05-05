@@ -5,24 +5,15 @@ import Dropzone from "react-dropzone";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const DragDrop = ({handleDrop,fileNames}) => {
-  const [selectedFile,setSelectedFile] = useState(null)
-  
-
-
-const onChangeHandler = (event) => {
-  setSelectedFile(event.target.files);
-};
-
-
-  
+const DragDrop = ({ handleDrop, fileNames }) => {
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const onClickHandler = () => {
     const data = new FormData();
-     for (var x = 0; x < selectedFile.length; x++) {
-          data.append("file", selectedFile[x]);
-     }
- 
+    for (var x = 0; x < selectedFile.length; x++) {
+      data.append("file", selectedFile[x]);
+    }
+
     axios
       .post("http://localhost:8000/upload", data, {
         // receive two    parameter endpoint url ,form data
@@ -31,6 +22,10 @@ const onChangeHandler = (event) => {
         // then print response status
         console.log(res.statusText);
       });
+  };
+
+  const onChangeHandler = (event) => {
+    setSelectedFile(event.target.files);
   };
 
   return (
@@ -43,6 +38,7 @@ const onChangeHandler = (event) => {
           ))}
         </ul>
       </div>
+
       <Dropzone onDrop={handleDrop}>
         {({ getRootProps, getInputProps }) => (
           <div
@@ -54,8 +50,7 @@ const onChangeHandler = (event) => {
           </div>
         )}
       </Dropzone>
-      <Link
-        to="/fileparser">
+      <Link to="/fileparser">
         <Button
           variant="primary"
           size="lg"
